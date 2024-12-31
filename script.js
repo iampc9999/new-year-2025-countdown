@@ -2,8 +2,8 @@
 const countdownElement = document.getElementById("countdown");
 const greetingElement = document.getElementById("greeting");
 
-// Set the New Year's date
-const newYearDate = new Date("December 31, 2024 12:25:00").getTime();
+// Set the New Year 2025 date
+const newYearDate = new Date("January 1, 2025 00:00:00").getTime();
 
 // Function to update the countdown
 const updateCountdown = () => {
@@ -16,11 +16,19 @@ const updateCountdown = () => {
     const minutes = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((gap % (1000 * 60)) / 1000);
 
-    countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    // Highlight the last 10 seconds
+    if (days === 0 && hours === 0 && minutes === 0 && seconds <= 10) {
+      countdownElement.classList.add("last-10");
+      countdownElement.textContent = seconds; // Display only seconds
+    } else {
+      countdownElement.classList.remove("last-10");
+      countdownElement.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
   } else {
-    clearInterval(timer); // Stop the countdown
-    countdownElement.classList.add("hidden"); // Hide countdown
-    greetingElement.classList.remove("hidden"); // Show greeting
+    // Stop the timer and show the greeting
+    clearInterval(timer);
+    countdownElement.classList.add("hidden"); // Hide the countdown
+    greetingElement.classList.remove("hidden"); // Show the greeting
   }
 };
 
