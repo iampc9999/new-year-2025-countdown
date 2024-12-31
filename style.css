@@ -54,3 +54,13 @@ h1 {
   height: 100%;
   pointer-events: none;
 }
+.new-year {
+  background: radial-gradient(circle, #ff7f50, #ff1493, #800080);
+  animation: backgroundFade 5s infinite alternate;
+}
+
+@keyframes backgroundFade {
+  0% { background-position: left; }
+  100% { background-position: right; }
+}
+document.body.classList.add("new-year");

@@ -1,5 +1,5 @@
 const countdown = () => {
-  const newYearDate = new Date("January 1, 2025 00:00:00").getTime();
+  const newYearDate = new Date("December 31, 2024 13:43:00").getTime();
   const now = new Date().getTime();
   const gap = newYearDate - now;
 
@@ -22,7 +22,34 @@ const countdown = () => {
     clearInterval(timer);
     document.getElementById("countdown").classList.add("hidden");
     document.getElementById("greeting").classList.remove("hidden");
-    startConfetti();
+  if (gap < 0) {
+  clearInterval(timer);
+  document.getElementById("countdown").classList.add("hidden"); // Hide the countdown
+  document.getElementById("greeting").classList.remove("hidden"); // Show the greeting
+}
+
+const playSound = () => {
+  const audio = document.getElementById("round-sound");
+  audio.play();
+};
+
+if (gap < 0) {
+  clearInterval(timer);
+  document.getElementById("countdown").classList.add("hidden");
+  document.getElementById("greeting").classList.remove("hidden");
+  startConfetti(); // Start confetti
+  playSound(); // Play celebration sound
+}
+
+
+    const startConfetti = () => {
+  confetti({
+    particleCount: 200,
+    spread: 100,
+    origin: { y: 0.6 },
+  });
+};
+;
   }
 };
 
