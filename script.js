@@ -3,7 +3,7 @@ const countdownElement = document.getElementById("countdown");
 const greetingElement = document.getElementById("greeting");
 
 // Set the New Year's date
-const newYearDate = new Date("January 1, 2025 00:00:00").getTime();
+const newYearDate = new Date("December 31, 2024 12:25:00").getTime();
 
 // Function to update the countdown
 const updateCountdown = () => {
