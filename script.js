@@ -22,7 +22,13 @@ const countdown = () => {
     clearInterval(timer);
     document.getElementById("countdown").classList.add("hidden");
     document.getElementById("greeting").classList.remove("hidden");
-    startConfetti();
+    const startConfetti = () => {
+  confetti({
+    particleCount: 200,
+    spread: 100,
+    origin: { y: 0.6 },
+  });
+};
   }
 };
 
