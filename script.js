@@ -1,42 +1,28 @@
-const countdown = () => {
-  const newYearDate = new Date("January 1, 2025 00:00:00").getTime();
+// Countdown Timer Script
+const countdownElement = document.getElementById("countdown");
+const greetingElement = document.getElementById("greeting");
+
+// Set the New Year's date
+const newYearDate = new Date("January 1, 2025 00:00:00").getTime();
+
+// Function to update the countdown
+const updateCountdown = () => {
   const now = new Date().getTime();
   const gap = newYearDate - now;
 
-  const second = 1000;
-  const minute = second * 60;
-  const hour = minute * 60;
-  const day = hour * 24;
+  if (gap > 0) {
+    const days = Math.floor(gap / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((gap % (1000 * 60)) / 1000);
 
-  const days = Math.floor(gap / day);
-  const hours = Math.floor((gap % day) / hour);
-  const minutes = Math.floor((gap % hour) / minute);
-  const seconds = Math.floor((gap % minute) / second);
-
-  document.getElementById("days").innerText = days;
-  document.getElementById("hours").innerText = hours;
-  document.getElementById("minutes").innerText = minutes;
-  document.getElementById("seconds").innerText = seconds;
-
-  if (gap < 0) {
-    clearInterval(timer);
-    document.getElementById("countdown").classList.add("hidden");
-    document.getElementById("greeting").classList.remove("hidden");
-    const startConfetti = () => {
-  confetti({
-    particleCount: 200,
-    spread: 100,
-    origin: { y: 0.6 },
-  });
-};
+    countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+  } else {
+    clearInterval(timer); // Stop the countdown
+    countdownElement.classList.add("hidden"); // Hide countdown
+    greetingElement.classList.remove("hidden"); // Show greeting
   }
 };
 
-const timer = setInterval(countdown, 1000);
-
-// Confetti Effect
-const startConfetti = () => {
-  const confettiCanvas = document.getElementById("confetti-canvas");
-  const confetti = new ConfettiGenerator({ target: confettiCanvas });
-  confetti.render();
-};
+// Start the countdown
+const timer = setInterval(updateCountdown, 1000);
